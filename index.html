@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti, Mi Selenita </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Floating hearts container -->
+  <div id="hearts-container"></div>
+
+  <!-- ===================== CAT ===================== -->
+  <div class="cat-wrap" id="cat-wrap">
+    <div class="cat" id="cat">
+      <div class="cat__ear cat__ear--left">
+        <div class="cat__ear-inner"></div>
+      </div>
+      <div class="cat__ear cat__ear--right">
+        <div class="cat__ear-inner"></div>
+      </div>
+      <div class="cat__head">
+        <div class="cat__eye cat__eye--left">
+          <div class="cat__pupil"></div>
+        </div>
+        <div class="cat__eye cat__eye--right">
+          <div class="cat__pupil"></div>
+        </div>
+        <div class="cat__nose"></div>
+        <div class="cat__mouth">
+          <div class="cat__mouth-l"></div>
+          <div class="cat__mouth-r"></div>
+        </div>
+        <div class="cat__whiskers cat__whiskers--left">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="cat__whiskers cat__whiskers--right">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="cat__body">
+        <div class="cat__belly"></div>
+        <div class="cat__tail"></div>
+        <div class="cat__paws">
+          <div class="cat__paw cat__paw--fl"></div>
+          <div class="cat__paw cat__paw--fr"></div>
+        </div>
+      </div>
+    </div>
+    <div class="cat__shadow"></div>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">🌸 una cartita de amor 🌸</p>
+      <h1 class="hero__title">
+        10 de las muchas cositas
+        <em>que hacen que me siga<br>enamorando de ti</em>
+      </h1>
+      <p class="hero__hint">Toca en cualquier parte y el gatito correrá a verte ✨</p>
+      <div class="hero__scroll">
+        <span>descúbrelas aquí abajo</span>
+        <div class="hero__arrow">↓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CARDS ==================== -->
+  <section class="section cards-section">
+    <div class="section__header">
+      <p class="section__sub">haz clic en cada cartita</p>
+      <h2 class="section__title">Mis razones</h2>
+    </div>
+    <div class="cards-grid" id="cards-grid"></div>
+  </section>
+
+  <!-- ==================== EXTRAS ==================== -->
+  <section class="section extras-section">
+    <div class="section__header">
+      <p class="section__sub">porque hay más</p>
+      <h2 class="section__title">Cositas que me recuerdan a ti</h2>
+    </div>
+    <div class="extras-grid">
+
+
+      <div class="extra-card songs-card">
+        <div class="extra-card__header">
+          <h3>🎵 Canciones que me hacen pensar en ti</h3>
+        </div>
+        <div class="songs-list" id="songs-list"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <p class="footer__main">Hecho con todo mi corazón 💕</p>
+  </footer>
+
+  <!-- ==================== MODAL ==================== -->
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal-letter" id="modal-letter">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
