@@ -96,6 +96,96 @@ const songs = [
 ];
 
 /* ================================================================
+   JOURNEY — Nuestro trayecto (una estación por cada mes cumplido)
+   ================================================================ */
+const START_DATE = { year: 2026, month: 6, day: 19 }; // 19 de julio
+const MONTH_NAMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+const journeyMonths = [
+  {
+    n: 1, emoji: '🌱',
+    title: 'El comienzo',
+    preview: 'Un 19 de julio, y un "síiiii" que lo cambió todo.',
+    body: 'Durante el primer mes, aprendí mucho más de ti. Aprendí a quererte, a conocerte, a admirarte. Aprendí que la vida es muy bonita cuando se comparte con alguien, que nada es dificíl si tienes una buena compañía, si tienes un roble que te sostenga y no te deje caer. Aquí confirmé que realmente eres la mujer más increíble que he conocido. Sin duda alguna aprendí que el amor contigo está en todas las cosas que hacemos, desde un simple "buenos días" hasta un "te amo" que me hace sentir el hombre más afortunado del mundo. Gracias por elegirme, gracias por amarme, gracias por ser tú.'
+  },
+  {
+    n: 2, emoji: '🌙',
+    title: 'Dos lunas de nosotros',
+    preview: 'Un mes más, y todavía me sigo enamorando.',
+    body: 'Dos lunas, y encima con la mía: la que vive en tu nombre. Aprendí a quererte en el "buenos días" de todas las mañanas, en el "ya llegué" de todos los días, en cómo el tiempo se nos va sin avisar. Cada día elijo quedarme, y siempre vuelvo a elegirte a ti. Aquí hubieron desacuerdos, discusiones pequeñas, pero también hubo reconciliaciones, abrazos, y mucho amor. Aprendí que el amor no es perfecto, pero sí es real. Y contigo, mi amor, todo es real. Muchas veces me pregunto cómo es que tuve tanta suerte de encontrarte, y la respuesta siempre es la misma: no hay suerte, hay destino. Y el destino nos trajo a este camino que apenas empieza, pero que ya me ha enseñado tanto. Gracias por ser mi compañera, mi amiga, mi amor. Gracias por ser tú. Aprendí a apreciar mucho más lo que tenemos, y a valorar cada momento que compartimos, desde las banqueteadas hasta los silencios cómodos. Sé que si tú me llegas a hacer falta en algún momento, mi mundo se caería a pedazos, sé que si esa risa que me hace feliz se apagara, mi corazón se rompería. Pero sé que eso nunca pasará, porque tú eres mi todo, y yo soy tuyo.  Felices dos meses, mi amor. Eres la mejor parte de mi vida, y no puedo esperar a seguir construyendo nuestro camino juntos. Te amo con todo mi corazón, hoy y siempre.'
+  },
+  {
+    n: 3, emoji: '🍂',
+    title: 'Cerquita de tu rutina',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 4, emoji: '🕯️',
+    title: 'El viaje, nuestro',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 5, emoji: '🎄',
+    title: 'Las fechas y yo',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 6, emoji: '❄️',
+    title: 'Mitad del primer año',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 7, emoji: '💌',
+    title: 'Me sigues eligiendo',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 8, emoji: '🌷',
+    title: 'Brotando',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 9, emoji: '🌧️',
+    title: 'Nuestras tormentas',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 10, emoji: '🌸',
+    title: 'Diez lunas',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 11, emoji: '☀️',
+    title: 'Un mes para el año',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  },
+  {
+    n: 12, emoji: '🥂',
+    title: 'Un año entero',
+    preview: 'Aún no se desbloquea… cuando pase su 19, aquí habrá un hermoso escrito esperándote.'
+  }
+];
+
+const foreverJourney = {
+  forever: true, emoji: '∞',
+  title: 'Lo que viene',
+  preview: 'Y después de un año… el viaje solo acaba de empezar.',
+  body: 'Al final de cada estación hay otra, y a la vuelta de cada mes hay más "nosotros". Esto no es un final: es un "y lo que sigue". Con todo lo que hemos construido, no puedo esperar a ver qué nos tiene preparado el camino. Contigo, y para siempre, sea la ruta.'
+};
+
+function journeyDate(n) {
+  const idx = (START_DATE.month + n) % 12;
+  const year = START_DATE.year + Math.floor((START_DATE.month + n) / 12);
+  return `19 de ${MONTH_NAMES[idx]}${year !== START_DATE.year ? ` de ${year}` : ''}`;
+}
+
+function monthsCompleted() {
+  const now = new Date();
+  const diff = (now.getFullYear() - START_DATE.year) * 12 + (now.getMonth() - START_DATE.month);
+  return Math.max(0, diff - (now.getDate() < START_DATE.day ? 1 : 0));
+}
+
+/* ================================================================
    RENDER CARDS
    ================================================================ */
 function renderCards() {
@@ -147,7 +237,91 @@ document.getElementById('modal-close').addEventListener('click', closeModal);
 modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+/* ================================================================
+   JOURNEY — RENDER & INTERACTION
+   ================================================================ */
+function openJourneyModal(m, reached, isNext) {
+  let inner;
+  if (m.forever) {
+    inner = `
+      <span class="modal__emoji">${m.emoji}</span>
+      <p class="modal__num">la parada que no termina</p>
+      <h2 class="modal__title">${m.title}</h2>
+      <hr class="modal__divider" />
+      <p class="modal__body">${m.body}</p>`;
+  } else if (reached) {
+    const body = (m.body && m.body.trim())
+      ? m.body
+      : 'Esta carta aún se está escribiendo, mi amor. Este mes ya llegó, pero quiero escribírtela despacito, con el corazón. Espéramela… muy pronto tendrás un hermoso escrito de lo que estuvo pasando aquí.';
+    inner = `
+      <span class="modal__emoji">${m.emoji}</span>
+      <p class="modal__num">Estación ${m.n} de 12 · ${journeyDate(m.n)}</p>
+      <h2 class="modal__title">${m.title}</h2>
+      <hr class="modal__divider" />
+      <p class="modal__body">${body}</p>`;
+  } else {
+    inner = `
+      <span class="modal__emoji">${isNext ? '🚂' : '🔒'}</span>
+      <p class="modal__num">${isNext ? 'estación al llegar' : 'estación en camino'}</p>
+      <h2 class="modal__title">${isNext ? 'Próxima parada' : 'Todavía no llega'}</h2>
+      <hr class="modal__divider" />
+      <p class="modal__body">${isNext
+        ? 'Esta parada está muy cerquita, mi amor. Cuando pase el 19, aquí estará tu cartita contando lo que cada día nuevo me sigue enseñando de ti.'
+        : 'Esta carta no existe todavía… porque aún no hemos vivido ese mes. Cuando llegue su 19, la escribiré con todo lo que el camino nos haya regalado entretanto.'}</p>`;
+  }
+  modalBody.innerHTML = inner;
+  modalBg.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
+function renderJourney() {
+  const track = document.getElementById('journey-track');
+  const counter = document.getElementById('journey-counter');
+  const done = monthsCompleted();
+
+  if (done === 0)        counter.textContent = 'Nuestro primer 19 está por llegar 🌱';
+  else if (done === 1)   counter.textContent = 'Ya es 1 luna y el camino apenas empieza a brillar ✨';
+  else                   counter.textContent = `Ya son ${done} lunas de nosotros, y cada estación nos hace más "nosotros" 💗`;
+
+  journeyMonths.forEach((m, i) => {
+    const reached = m.n <= done;
+    const isNext  = done > 0 && m.n === done + 1;
+    const st = document.createElement('div');
+    st.className = 'station';
+    st.classList.add(i % 2 ? 'station--right' : 'station--left');
+    st.classList.add(reached ? 'station--reached' : (isNext ? 'station--next' : 'station--locked'));
+
+    st.innerHTML = `
+      <div class="station__node">${reached ? m.emoji : (isNext ? '⭐' : '🔒')}</div>
+      <div class="station__card">
+        <span class="station__num">Mes ${m.n}</span>
+        <p class="station__meta">${journeyDate(m.n)} · ${m.title}</p>
+        <p class="station__preview">${m.preview}</p>
+        ${reached ? '<span class="station__hint">toca para leer tu carta ✦</span>' : ''}
+      </div>
+    `;
+
+    const open = () => openJourneyModal(m, reached, isNext);
+    st.querySelector('.station__card').addEventListener('click', open);
+    st.querySelector('.station__node').addEventListener('click', open);
+    track.appendChild(st);
+  });
+
+  const f = document.createElement('div');
+  f.className = 'station station--locked station--right';
+  f.innerHTML = `
+    <div class="station__node">∞</div>
+    <div class="station__card">
+      <span class="station__num">Para siempre</span>
+      <p class="station__meta">más allá de las estaciones</p>
+      <p class="station__preview">${foreverJourney.preview}</p>
+    </div>
+  `;
+  const openForever = () => openJourneyModal(foreverJourney, false, false);
+  f.querySelector('.station__card').addEventListener('click', openForever);
+  f.querySelector('.station__node').addEventListener('click', openForever);
+  track.appendChild(f);
+}
 
 /* ================================================================
    RENDER SONGS
@@ -236,7 +410,7 @@ function spawnHearts(x, y) {
 /* ================================================================
    EVENT LISTENERS — click & touch
    ================================================================ */
-const IGNORED_SELECTORS = '.card, .modal-bg, .modal-letter, .extra-card, footer, .song-item, .emoji-item';
+const IGNORED_SELECTORS = '.card, .modal-bg, .modal-letter, .extra-card, footer, .song-item, .emoji-item, .station, .station__card, .station__node';
 
 document.addEventListener('click', e => {
   if (e.target.closest(IGNORED_SELECTORS)) return;
@@ -254,3 +428,4 @@ document.addEventListener('touchend', e => {
    ================================================================ */
 renderCards();
 renderSongs();
+renderJourney();

@@ -647,6 +647,180 @@ body {
 }
 
 /* ================================================================
+   JOURNEY — Nuestro trayecto
+   ================================================================ */
+.journey-section { position: relative; }
+
+.journey__intro {
+  text-align: center;
+  color: var(--mid);
+  max-width: 560px;
+  margin: -1.5rem auto 0;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.journey__counter-wrap { text-align: center; margin-top: 1.2rem; }
+.journey__counter {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .45rem 1.1rem;
+  background: linear-gradient(135deg, rgba(201,134,138,.14), rgba(201,169,110,.16));
+  border: 1px solid rgba(201,134,138,.35);
+  border-radius: 100px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: .95rem;
+  color: var(--dark);
+}
+
+.journey-track {
+  position: relative;
+  max-width: 900px;
+  margin: 3.5rem auto 1rem;
+  padding: 0 1rem;
+}
+
+/* railway: dos rieles + traviesas */
+.journey-track::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(61,43,31,0) 0 30px,
+      rgba(122,92,74,.20) 30px 31px,
+      rgba(61,43,31,0) 31px 62px
+    ),
+    linear-gradient(
+      to right,
+      transparent 0 4px,
+      rgba(122,92,74,.42) 4px 6px,
+      transparent 6px 12px,
+      rgba(122,92,74,.42) 12px 14px,
+      transparent 14px 18px
+    );
+}
+
+/* una fila de estación: nodo al centro, tarjeta a un lado */
+.station {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 140px;
+}
+
+.station__node {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.55rem;
+  cursor: pointer;
+  z-index: 3;
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  box-shadow:
+    0 4px 16px rgba(201,134,138,.5),
+    0 0 0 6px rgba(201,134,138,.14);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.station--reached .station__node:hover {
+  transform: translate(-50%, -50%) scale(1.14) rotate(6deg);
+}
+
+.station--right .station__card { margin-left: auto; }
+.station--left  .station__card { margin-right: auto; }
+
+.station__card {
+  width: calc(50% - 3.4rem);
+  background-color: var(--paper);
+  border-radius: 3px;
+  padding: 1.15rem 1.4rem;
+  position: relative;
+  cursor: pointer;
+  background-image: repeating-linear-gradient(
+    transparent 0 27px,
+    rgba(61,43,31,.045) 27px 28px
+  );
+  box-shadow:
+    0 2px 4px rgba(61,43,31,.07),
+    0 8px 20px rgba(61,43,31,.06),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.station--reached .station__card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 30px rgba(61,43,31,.14),
+    inset 0 0 0 1px rgba(255,255,255,.8);
+}
+
+.station__num {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--rose);
+  display: block;
+}
+.station__meta {
+  font-size: .82rem;
+  color: var(--soft);
+  font-style: italic;
+  margin: .2rem 0 .45rem;
+}
+.station__preview {
+  font-size: .9rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+.station__hint {
+  display: block;
+  margin-top: .5rem;
+  font-size: .68rem;
+  color: rgba(61,43,31,.38);
+  font-style: italic;
+}
+
+/* estaciones aún no vividas */
+.station--locked .station__node {
+  background: var(--paper-dark);
+  box-shadow: none;
+  color: var(--soft);
+  border: 2px dashed rgba(122,92,74,.4);
+  font-size: 1.2rem;
+  cursor: default;
+}
+.station--locked .station__node:hover { transform: translate(-50%, -50%); }
+.station--locked .station__card {
+  background: transparent;
+  box-shadow: none;
+  border: 1.5px dashed rgba(122,92,74,.28);
+  cursor: default;
+}
+.station--locked .station__num { color: var(--soft); }
+.station--locked .station__meta { color: rgba(122,92,74,.6); }
+.station--locked .station__preview { color: rgba(122,92,74,.72); }
+
+/* la próxima parada brillando */
+.station--next .station__node {
+  background: var(--paper);
+  border: 2px dashed var(--rose);
+  box-shadow: 0 0 0 6px rgba(201,134,138,.12);
+  animation: nextPulse 1.8s ease-in-out infinite;
+}
+.station--next .station__node:hover { transform: translate(-50%, -50%) scale(1.1); }
+@keyframes nextPulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(201,134,138,.12); }
+  50%      { box-shadow: 0 0 0 12px rgba(201,134,138,.02); }
+}
+
+/* ================================================================
    FOOTER
    ================================================================ */
 .footer {
@@ -688,6 +862,22 @@ body {
     padding: 2.5rem 1.5rem;
   }
   .section { padding: 3.5rem 1.2rem; }
+}
+
+@media (max-width: 640px) {
+  .station {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 2.2rem 0 1rem;
+  }
+  .station__node { top: 1.6rem; }
+  .station__card {
+    width: min(420px, 100%);
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 @media (max-width: 400px) {
